@@ -16,7 +16,7 @@ public class MixinClientPlayNetworkHandler {
     // TODO: Verify is the yarn->mojang translation correct
     @ModifyVariable(method = "markMessageAsProcessed", at = @At("HEAD"), argsOnly = true, index = 2)
     public boolean acknowledge(MessageSignature message, boolean value) {
-        return message.getSender().equals(Minecraft.getInstance().player.getUuid());
+        return message.getSender().equals(Minecraft.getInstance().player.getUUID());
     }
 
 }
