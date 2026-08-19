@@ -1,21 +1,22 @@
 package gg.nodus.guardian.mixin;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.network.message.SignedMessage;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.network.chat.MessageSignature;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-@Mixin(ClientPlayNetworkHandler.class)
+@Mixin(ClientPacketListener.class)
 public class MixinClientPlayNetworkHandler {
 
     /**
      * LMFAO
      */
-    @ModifyVariable(method = "acknowledge", at = @At("HEAD"), argsOnly = true, index = 2)
-    public boolean acknowledge(boolean value, SignedMessage message) {
-        return message.getSender().equals(MinecraftClient.getInstance().player.getUuid());
+    // TODO: Verify is the yarn->mojang translation correct
+    @ModifyVariable(method = "markMessageAsProcessed", at = @At("HEAD"), argsOnly = true, index = 2)
+    public boolean acknowledge(MessageSignature message, boolean value) {
+        return message.getSender().equals(Minecraft.getInstance().player.getUuid());
     }
 
 }
