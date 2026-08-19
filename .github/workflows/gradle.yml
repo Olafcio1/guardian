@@ -39,7 +39,7 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v7.0.1
       with:
-        name: # optional, default is artifact
+        name: guardian-1.0-SNAPSHOT.jar
         path: build/libs/*
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
