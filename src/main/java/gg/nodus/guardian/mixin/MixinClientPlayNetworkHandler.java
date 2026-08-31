@@ -23,7 +23,7 @@ public class MixinClientPlayNetworkHandler {
      * LMFAO
      */
     // TODO: Verify is the yarn->mojang translation correct
-    @Inject(method = "showMessageToPlayer", at = @At("RETURN"))
+    @Inject(method = "showMessageToPlayer", at = @At("RETURN"), cancellable = true)
     public void acknowledge(ChatType.Bound bound, PlayerChatMessage message, Component component, GameProfile gameProfile, boolean bl, Instant instant, CallbackInfoReturnable<Boolean> ci) {
         ci.setReturnValue(message.sender().equals(Minecraft.getInstance().player.getUUID()));
     }
